@@ -6,7 +6,7 @@
 
   **A bilingual, interactive portfolio connecting full-stack development, game development and experience design.**
 
-  [Live portfolio](https://daniel-hernandez-dev.tazsu.chatgpt.site) · [LinkedIn](https://www.linkedin.com/in/daniel-hernandez-tamayo/) · [GitHub](https://github.com/DanielHernandez131)
+  [LinkedIn](https://www.linkedin.com/in/daniel-hernandez-tamayo/) · [GitHub](https://github.com/DanielHernandez131)
 </div>
 
 ## About the project
@@ -25,6 +25,19 @@ The experience includes selected projects, professional and academic background,
 - Accessible semantic markup and keyboard-friendly interactions.
 - Contact form that prepares a pre-filled email without requiring a backend.
 - Lightweight implementation with no frameworks or runtime dependencies.
+
+## Run locally
+
+No installation or build process is required. Clone the repository and start a local static server:
+
+```bash
+git clone https://github.com/DanielHernandez131/DanielHernandez_PortfolioWeb.git
+cd DanielHernandez_PortfolioWeb
+python3 -m http.server 8000
+```
+
+Then open [http://localhost:8000](http://localhost:8000) in your browser.
+
 
 ## Featured projects
 
@@ -49,20 +62,6 @@ A game concept that explores emotions as gameplay mechanics, inspired by Plutchi
 | Game Development | Unity, C#, Java, C++, game design, mechanics design |
 
 This portfolio itself is built with semantic HTML, modular CSS and vanilla JavaScript.
-
-## Run locally
-
-No installation or build process is required. Clone the repository and start a local static server:
-
-```bash
-git clone https://github.com/DanielHernandez131/REPOSITORY-NAME.git
-cd REPOSITORY-NAME
-python3 -m http.server 8000
-```
-
-Then open [http://localhost:8000](http://localhost:8000) in your browser.
-
-> Replace `REPOSITORY-NAME` with the final name of this repository.
 
 ## Project structure
 
