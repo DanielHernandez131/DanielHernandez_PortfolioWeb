@@ -1,55 +1,10 @@
-/* =========================================================
-   Design tokens
-   Change these values to update the Full-Stack colour theme.
-   ========================================================= */
-:root {
-  --bg: #111314;
-  --surface: #191c1e;
-  --text: #f1f2ed;
-  --muted: #a2a6a5;
-  --line: #303436;
-  --accent: #c2f970;
-}
-* {
-  box-sizing: border-box;
-}
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 95px;
-}
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
-button {
-  font: inherit;
-}
-a,
-button,
-summary {
-  -webkit-tap-highlight-color: transparent;
-}
-a:focus-visible,
-button:focus-visible,
-summary:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 6px;
-}
-.wrap {
-  max-width: 1240px;
-  margin: auto;
-  padding-left: 40px;
-  padding-right: 40px;
-}
+/* Header and navigation */
 header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--bg);
+  transition: background-color 0.35s ease;
   height: 94px;
   max-width: 1320px;
   padding: 0 40px;
@@ -58,19 +13,6 @@ header {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--line);
-}
-.brand {
-  font-size: 34px;
-  letter-spacing: -4px;
-  font-weight: 800;
-  line-height: 1;
-}
-.brand span {
-  font-weight: 400;
-}
-.brand b {
-  color: var(--accent);
-  letter-spacing: 0;
 }
 nav {
   display: flex;
@@ -93,10 +35,8 @@ footer a:hover {
   margin-left: 16px;
   color: var(--accent);
 }
+/* Hero and shared actions */
 .hero {
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 55px;
   padding-top: 82px;
   padding-bottom: 0;
 }
@@ -113,17 +53,6 @@ footer a:hover {
   height: 1px;
   width: 25px;
   background: var(--accent);
-}
-h1 {
-  font-size: clamp(44px, 5.2vw, 70px);
-  letter-spacing: -3.5px;
-  line-height: 1.08;
-  font-weight: 500;
-  margin: 27px 0;
-}
-em {
-  font-style: normal;
-  color: var(--accent);
 }
 .intro {
   font-size: 17px;
@@ -155,7 +84,7 @@ em {
   color: #17200c;
 }
 .primary:hover {
-  background: #d6ffa0;
+  background: var(--primary-hover);
 }
 .text-link span {
   margin-left: 10px;
@@ -167,6 +96,7 @@ em {
   align-items: center;
   gap: 10px;
   margin-top: 35px;
+  flex-wrap: wrap;
 }
 .location > span {
   font-size: 20px;
@@ -178,6 +108,7 @@ em {
   background: #5f6465;
   margin: 0 5px;
 }
+/* Illustrative profile editor */
 .code-scene {
   padding-top: 51px;
   min-width: 0;
@@ -224,9 +155,6 @@ em {
 .dots i:first-child {
   background: #c2f970;
 }
-.file-icon {
-  color: #727b7a;
-}
 .code-tabs {
   display: flex;
   border-bottom: 1px solid var(--line);
@@ -252,6 +180,7 @@ em {
   font-size: 13px;
   line-height: 1.9;
   min-height: 344px;
+  min-width: 0;
 }
 .line-numbers {
   font-family: monospace;
@@ -260,21 +189,6 @@ em {
   width: 43px;
   flex-shrink: 0;
   margin-right: 17px;
-}
-pre {
-  font-family: monospace;
-  margin: 0;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-.muted {
-  color: #73817c;
-}
-.purple {
-  color: #bba6ea;
-}
-.lime {
-  color: var(--accent);
 }
 .window-footer {
   padding: 8px 16px;
@@ -305,6 +219,7 @@ pre {
   color: #7e8684;
   margin-top: 8px;
 }
+/* Section headings and project cards */
 .section {
   padding-top: 85px;
   padding-bottom: 15px;
@@ -316,25 +231,10 @@ pre {
   gap: 25px;
   margin-bottom: 32px;
 }
-h2 {
-  font-size: 40px;
-  letter-spacing: -1.5px;
-  font-weight: 500;
-  line-height: 1.15;
-  margin: 18px 0;
-}
-h2 > span {
-  color: var(--accent);
-}
 .section-heading p {
   font-size: 14px;
   color: var(--muted);
   margin: 0 0 4px;
-}
-.projects {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
 }
 .project {
   border: 1px solid var(--line);
@@ -343,10 +243,10 @@ h2 > span {
   background: #16191a;
 }
 .project-visual {
-  height: 290px;
   padding: 25px 28px;
   display: flex;
   flex-direction: column;
+  min-height: 290px;
 }
 .visual-top {
   display: flex;
@@ -355,6 +255,8 @@ h2 > span {
   font-size: 10px;
   letter-spacing: 1.2px;
   opacity: 0.75;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 .pb {
   background: #dce6d7;
@@ -365,6 +267,7 @@ h2 > span {
   line-height: 1.1;
   letter-spacing: -1.5px;
   margin: 27px 0 20px;
+  overflow-wrap: anywhere;
 }
 .pb-title em {
   color: #466d5d;
@@ -373,6 +276,7 @@ h2 > span {
 .phases {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 }
 .phases > span {
   display: flex;
@@ -399,8 +303,8 @@ h2 > span {
 }
 .oniria-title {
   font-family: Georgia, serif;
-  font-size: 58px;
-  letter-spacing: 11px;
+  font-size: clamp(32px, 8vw, 58px);
+  letter-spacing: clamp(5px, 1.5vw, 11px);
   text-align: center;
   margin: 29px 0 23px;
   color: #ded1fd;
@@ -415,6 +319,7 @@ h2 > span {
   display: flex;
   gap: 5px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .emotion-strip span {
   padding: 4px 10px;
@@ -456,11 +361,6 @@ h2 > span {
   color: var(--muted);
   margin: 14px 0 18px;
 }
-.tags {
-  display: flex;
-  gap: 7px;
-  flex-wrap: wrap;
-}
 .tags span {
   font: 11px monospace;
   color: #bbc0b9;
@@ -483,12 +383,13 @@ summary {
 summary::-webkit-details-marker {
   display: none;
 }
-summary span {
+summary > b {
   color: var(--accent);
   font-size: 20px;
+  font-weight: 400;
   line-height: 1;
 }
-details[open] summary span {
+details[open] summary > b {
   transform: rotate(45deg);
 }
 .details-content h4 {
@@ -500,10 +401,8 @@ details[open] summary span {
   color: var(--muted);
   margin: 0;
 }
+/* Experience timeline */
 .experience {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 90px;
   margin-top: 35px;
   border-top: 1px solid var(--line);
 }
@@ -551,11 +450,7 @@ details[open] summary span {
   color: var(--muted);
   margin-bottom: 0;
 }
-.tech-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
+/* Technology cards */
 .tech-grid article {
   padding: 28px;
   background: #191c1d;
@@ -576,11 +471,6 @@ details[open] summary span {
   font-size: 14px;
   margin: 0 0 25px;
 }
-.tech-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
 .tech-list span {
   padding: 6px 10px;
   border: 1px solid #394039;
@@ -588,63 +478,210 @@ details[open] summary span {
   font-size: 12px;
   color: #cdd1ca;
 }
+/* Contact section and footer */
 .contact {
   margin-top: 80px;
   border-top: 1px solid var(--line);
   padding-bottom: 70px;
-}
-.contact-row {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 70px;
-  align-items: start;
-}
-.contact h2 {
-  font-size: 55px;
-}
-.contact-row > div > p {
-  font-size: 16px;
-  color: var(--muted);
-}
-.contact-pending {
-  border-left: 2px solid var(--accent);
-  padding-left: 17px;
-  margin-top: 25px;
-}
-.contact-pending > span {
-  font: 10px monospace;
-  letter-spacing: 1px;
-  color: var(--accent);
-}
-.contact-pending p {
-  font-size: 13px;
-  color: var(--muted);
-  margin: 5px 0;
 }
 footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid var(--line);
-  padding-top: 25px !important;
-  padding-bottom: 30px !important;
+  padding-top: 25px;
+  padding-bottom: 30px;
   color: var(--muted);
   font-size: 12px;
 }
-footer .brand {
-  color: var(--text);
-  font-size: 28px;
+/* Brand and language controls */
+.quantum-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: monospace;
+  font-weight: 700;
 }
+.quantum-logo img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  transition: filter 0.35s ease;
+}
+body[data-stack="web"] .quantum-logo img {
+  filter: drop-shadow(0 0 7px rgba(194, 249, 112, 0.2));
+}
+body[data-stack="game"] .quantum-logo img {
+  filter: drop-shadow(0 0 9px rgba(169, 138, 255, 0.35));
+}
+.brand-word {
+  color: var(--accent);
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.language-toggle {
+  display: flex;
+  gap: 5px;
+  border: 0;
+  background: transparent;
+  color: #747b79;
+  cursor: pointer;
+  font: 12px monospace;
+  padding: 10px 5px;
+}
+.language-toggle .active-lang {
+  color: var(--accent);
+}
+.nav-contact b {
+  margin-left: 12px;
+  color: var(--accent);
+  font-weight: 400;
+}
+/* Social links */
+.online {
+  border-top: 1px solid var(--line);
+  margin-top: 75px;
+}
+.online-grid > a {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  background: #191c1d;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+.online-grid > a:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.online-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #17200c;
+  font: 700 15px monospace;
+}
+.online-grid strong {
+  display: block;
+  font-size: 18px;
+}
+.online-grid small {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.online-grid b {
+  color: var(--accent);
+  font-weight: 400;
+}
+/* Contact form */
+.contact-copy h2 {
+  font-size: 58px;
+  margin-top: 0;
+}
+.contact-copy p {
+  max-width: 430px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.contact-copy > a {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--accent);
+  font: 13px monospace;
+}
+.contact-form {
+  display: grid;
+  gap: 10px;
+  padding: 30px;
+  background: #181a1c;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+.contact-form label {
+  margin-top: 8px;
+  color: #c9cbc7;
+  font-size: 14px;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid #34383c;
+  border-radius: 6px;
+  background: #202226;
+  color: var(--text);
+  padding: 14px 15px;
+  font: inherit;
+  resize: vertical;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+.contact-form ::placeholder {
+  color: #73777d;
+}
+.form-submit {
+  justify-content: center;
+  border: 0;
+  margin-top: 14px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.form-status {
+  min-height: 1.5em;
+  margin: 0;
+  color: var(--accent);
+  font-size: 13px;
+}
+.footer-logo {
+  transform: scale(0.85);
+  transform-origin: left center;
+}
+/* Profile-specific surfaces; shared color tokens live in base.css */
+body[data-stack="game"] .code-window,
+body[data-stack="game"] .tech-grid article,
+body[data-stack="game"] .online-grid > a,
+body[data-stack="game"] .contact-form {
+  background: #17121f;
+}
+body[data-stack="game"] .code-tabs button.selected {
+  background: #241b33;
+}
+body[data-stack="game"] .tags span {
+  background: #251e31;
+  color: #d5cbe2;
+}
+body[data-stack="game"] .primary,
+body[data-stack="game"] .online-icon {
+  color: #150d21;
+}
+
+/* Responsive refinements complement the grid breakpoints in JSX */
 @media (min-width: 1500px) {
   .hero {
     padding-top: 105px;
     padding-bottom: 15px;
   }
 }
+
 @media (max-width: 1000px) {
-  .hero {
-    gap: 25px;
-  }
   h1 {
     font-size: 53px;
   }
@@ -666,19 +703,17 @@ footer .brand {
     display: block;
     margin-top: 5px;
   }
-  .experience {
-    gap: 45px;
-  }
   .visual-top {
     font-size: 9px;
   }
   .oniria-title {
-    font-size: 46px;
+    font-size: clamp(32px, 8vw, 46px);
   }
-  .contact h2 {
+  .contact-copy h2 {
     font-size: 46px;
   }
 }
+
 @media (max-width: 720px) {
   .wrap {
     padding-left: 22px;
@@ -687,13 +722,7 @@ footer .brand {
   header {
     padding: 0 22px;
     height: 78px;
-  }
-  nav {
-    gap: 17px;
-    font-size: 12px;
-  }
-  nav a:nth-child(3) {
-    display: none;
+    gap: 10px;
   }
   .nav-contact {
     font-size: 12px;
@@ -703,9 +732,7 @@ footer .brand {
     margin-left: 4px;
   }
   .hero {
-    grid-template-columns: 1fr;
     padding-top: 47px;
-    gap: 12px;
   }
   h1 {
     font-size: clamp(42px, 10vw, 65px);
@@ -750,11 +777,8 @@ footer .brand {
   .section-heading p {
     margin-top: 15px;
   }
-  .projects {
-    grid-template-columns: 1fr;
-  }
   .project-visual {
-    height: 280px;
+    min-height: 280px;
   }
   .project-title {
     display: flex;
@@ -764,15 +788,10 @@ footer .brand {
     text-align: right;
   }
   .experience {
-    grid-template-columns: 1fr;
-    gap: 28px;
     margin-top: 45px;
   }
   .experience h2 {
     font-size: 37px;
-  }
-  .tech-grid {
-    grid-template-columns: 1fr;
   }
   .tech-grid article {
     padding: 24px;
@@ -789,22 +808,9 @@ footer .brand {
     margin-top: 50px;
     padding-bottom: 45px;
   }
-  .contact-row {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-  .contact h2 {
-    font-size: 43px;
-  }
-  .contact-row > div > p {
-    max-width: 440px;
-  }
   footer {
     gap: 20px;
     flex-wrap: wrap;
-  }
-  footer .brand {
-    display: none;
   }
   .eyebrow {
     font-size: 10px;
@@ -812,12 +818,55 @@ footer .brand {
   .orbit-label {
     font-size: 10px;
   }
+  header nav {
+    display: none;
+  }
+  .quantum-logo {
+    gap: 5px;
+  }
+  .quantum-logo img {
+    width: 42px;
+    height: 42px;
+  }
+  .brand-word {
+    font-size: 15px;
+  }
+  .header-actions {
+    gap: 5px;
+  }
+  .online-grid > a {
+    padding: 18px;
+  }
+  .contact-form {
+    padding: 20px;
+  }
+  .footer-logo {
+    display: none;
+  }
 }
+
+/* Respect the visitor's motion preference for scrolling and transitions */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
   * {
     transition: none !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .project-title {
+    display: block;
+  }
+  .project-title > span {
+    max-width: none;
+    text-align: left;
+  }
+  .project-visual {
+    padding: 22px 18px;
+  }
+  .phases > span {
+    padding: 5px 10px;
   }
 }

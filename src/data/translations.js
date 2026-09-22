@@ -1,9 +1,26 @@
 /**
- * All visible copy lives here so the interface can switch language without
- * duplicating the HTML. Add the same key to both languages when adding text.
+ * Shared copy for both languages. Keep the same keys and value shapes in es/en.
+ * Components access keys directly; project metadata references them by name.
+ * Rich copy supports only flat <strong> and <br> markers (see RichText).
  */
-const translations = {
+export const translations = {
   es: {
+    homeLabel: "Daniel Hernández, inicio",
+    navigationLabel: "Navegación principal",
+    city: "Madrid, España",
+    profileCommentWeb: "Del concepto a la interacción",
+    profileCommentGame: "La creatividad también se programa",
+    profileApproach: ["Diseñar", "Construir", "Iterar"],
+    profileInterests: [
+      "Mecánicas",
+      "Diseño de niveles",
+      "Experiencias interactivas",
+    ],
+    mailSubject: "Contacto portfolio",
+    mailName: "Nombre",
+    mailEmail: "Email",
+    mailMessage: "Mensaje",
+
     navProjects: "Proyectos",
     navExperience: "Experiencia",
     navTech: "Tecnologías",
@@ -106,6 +123,18 @@ const translations = {
     backTop: "Volver arriba ↑",
   },
   en: {
+    homeLabel: "Daniel Hernández, home",
+    navigationLabel: "Main navigation",
+    city: "Madrid, Spain",
+    profileCommentWeb: "From concept to interaction",
+    profileCommentGame: "Creativity can be programmed too",
+    profileApproach: ["Design", "Build", "Iterate"],
+    profileInterests: ["Mechanics", "Level design", "Interactive experiences"],
+    mailSubject: "Portfolio enquiry",
+    mailName: "Name",
+    mailEmail: "Email",
+    mailMessage: "Message",
+
     navProjects: "Projects",
     navExperience: "Experience",
     navTech: "Technologies",
@@ -208,89 +237,3 @@ const translations = {
     backTop: "Back to top ↑",
   },
 };
-
-/** Code samples shown in the interactive profile window. */
-const profiles = {
-  es: {
-    web: `<span class="muted">// Del concepto a la interacción</span>\n<span class="purple">const</span> developer = {\n  name: <span class="lime">"Daniel Hernández"</span>,\n  role: <span class="lime">"Full-Stack Developer"</span>,\n  stack: [\n    <span class="lime">"JavaScript"</span>, <span class="lime">"HTML"</span>, <span class="lime">"CSS"</span>,\n    <span class="lime">"Python"</span>, <span class="lime">"Flask"</span>, <span class="lime">"SQL"</span>\n  ],\n  approach: [<span class="lime">"Diseñar"</span>, <span class="lime">"Construir"</span>, <span class="lime">"Iterar"</span>]\n};`,
-    game: `<span class="muted">// La creatividad también se programa</span>\n<span class="purple">class</span> GameDeveloper {\n  string name = <span class="lime">"Daniel"</span>;\n  string engine = <span class="lime">"Unity"</span>;\n  string[] languages = { <span class="lime">"C#"</span>, <span class="lime">"Java"</span>, <span class="lime">"C++"</span> };\n  string[] interests = {\n    <span class="lime">"Mecánicas"</span>,\n    <span class="lime">"Diseño de niveles"</span>,\n    <span class="lime">"Experiencias interactivas"</span>\n  };\n}`,
-  },
-  en: {
-    web: `<span class="muted">// From concept to interaction</span>\n<span class="purple">const</span> developer = {\n  name: <span class="lime">"Daniel Hernández"</span>,\n  role: <span class="lime">"Full-Stack Developer"</span>,\n  stack: [\n    <span class="lime">"JavaScript"</span>, <span class="lime">"HTML"</span>, <span class="lime">"CSS"</span>,\n    <span class="lime">"Python"</span>, <span class="lime">"Flask"</span>, <span class="lime">"SQL"</span>\n  ],\n  approach: [<span class="lime">"Design"</span>, <span class="lime">"Build"</span>, <span class="lime">"Iterate"</span>]\n};`,
-    game: `<span class="muted">// Creativity can be programmed too</span>\n<span class="purple">class</span> GameDeveloper {\n  string name = <span class="lime">"Daniel"</span>;\n  string engine = <span class="lime">"Unity"</span>;\n  string[] languages = { <span class="lime">"C#"</span>, <span class="lime">"Java"</span>, <span class="lime">"C++"</span> };\n  string[] interests = {\n    <span class="lime">"Mechanics"</span>,\n    <span class="lime">"Level design"</span>,\n    <span class="lime">"Interactive experiences"</span>\n  };\n}`,
-  },
-};
-
-// Small state object: the active language and professional profile.
-let language = "es";
-let activeProfile = "web";
-const code = document.getElementById("code");
-const languageToggle = document.getElementById("language-toggle");
-
-/** Updates both the code sample and the page-wide colour theme. */
-function renderCode() {
-  code.innerHTML = profiles[language][activeProfile];
-  document.body.dataset.stack = activeProfile;
-}
-/** Applies translations to elements marked with data-i18n attributes. */
-function setLanguage(next) {
-  language = next;
-  document.documentElement.lang = next;
-  document
-    .querySelectorAll("[data-i18n]")
-    .forEach((el) => (el.textContent = translations[next][el.dataset.i18n]));
-  document
-    .querySelectorAll("[data-i18n-html]")
-    .forEach((el) => (el.innerHTML = translations[next][el.dataset.i18nHtml]));
-  document
-    .querySelectorAll("[data-i18n-placeholder]")
-    .forEach(
-      (el) => (el.placeholder = translations[next][el.dataset.i18nPlaceholder]),
-    );
-  languageToggle.innerHTML =
-    next === "es"
-      ? '<span class="active-lang">ES</span><span>/</span><span>EN</span>'
-      : '<span>ES</span><span>/</span><span class="active-lang">EN</span>';
-  languageToggle.setAttribute(
-    "aria-label",
-    next === "es" ? "Change language to English" : "Cambiar idioma a español",
-  );
-  renderCode();
-}
-
-// Language switcher.
-languageToggle.addEventListener("click", () =>
-  setLanguage(language === "es" ? "en" : "es"),
-);
-// Professional profile switcher: Full-Stack (lime) or Game Dev (violet).
-document.querySelectorAll("[data-code]").forEach((button) =>
-  button.addEventListener("click", () => {
-    activeProfile = button.dataset.code;
-    document.querySelectorAll("[data-code]").forEach((item) => {
-      item.classList.toggle("selected", item === button);
-      item.setAttribute("aria-pressed", String(item === button));
-    });
-    renderCode();
-  }),
-);
-
-// Build a pre-filled email while keeping the site fully static and serverless.
-document.getElementById("contact-form").addEventListener("submit", (event) => {
-  event.preventDefault();
-  const data = new FormData(event.currentTarget);
-  const subject =
-    language === "es"
-      ? `Contacto portfolio — ${data.get("name")}`
-      : `Portfolio enquiry — ${data.get("name")}`;
-  const body =
-    language === "es"
-      ? `Nombre: ${data.get("name")}\nEmail: ${data.get("email")}\n\nMensaje:\n${data.get("message")}`
-      : `Name: ${data.get("name")}\nEmail: ${data.get("email")}\n\nMessage:\n${data.get("message")}`;
-  document.getElementById("form-status").textContent =
-    translations[language].formStatus;
-  window.location.href = `mailto:d.hernandezt.96@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-});
-
-// Keep the footer year current automatically.
-document.getElementById("year").textContent = new Date().getFullYear();
-setLanguage("es");
