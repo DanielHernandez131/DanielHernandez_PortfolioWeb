@@ -68,6 +68,21 @@ npm test         # Check translations, project data and email encoding
 
 Deploy the contents of `dist/` to a static host. Vite uses relative asset URLs so the build can also be hosted in a repository subdirectory. Opening `index.html` directly or serving the source with Python no longer runs the application; use Vite during development.
 
+## Publish to GitHub Pages
+
+The workflow in `.github/workflows/deploy.yml` runs tests, builds the website and deploys it whenever changes reach `main`.
+
+1. In the GitHub repository, open **Settings → Pages** and select **GitHub Actions** under **Build and deployment → Source**.
+2. Commit and push the workflow and portfolio source to your working branch.
+3. Open a pull request targeting `main` and merge it after review.
+4. Open **Actions → Deploy portfolio to GitHub Pages** and wait for both jobs to succeed. The deployment summary provides the published URL.
+
+Expected URL: https://danielhernandez131.github.io/DanielHernandez_PortfolioWeb/
+
+The workflow uses Node.js 24 and builds with the repository path as Vite's base URL. Local builds retain relative asset paths. If the repository is renamed or a custom domain is configured, update the workflow's `--base` argument accordingly. `dist/` and `node_modules/` remain ignored; GitHub generates the deployment artifact from source.
+
+Once the workflow exists on `main`, **Actions → Deploy portfolio to GitHub Pages → Run workflow** can also trigger a deployment from `main`.
+
 ## Project structure
 
 ```text
