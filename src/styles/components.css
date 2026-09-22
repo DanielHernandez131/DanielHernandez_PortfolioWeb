@@ -1,6 +1,10 @@
-/* Bespoke portfolio visuals; common layouts use Tailwind in JSX. */
 /* Header and navigation */
 header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--bg);
+  transition: background-color 0.35s ease;
   height: 94px;
   max-width: 1320px;
   padding: 0 40px;

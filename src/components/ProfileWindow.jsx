@@ -1,6 +1,5 @@
-/**
+/*
  * Highlights only the syntax used in the two display snippets.
- * Tokens remain React text nodes; no HTML injection or highlighting dependency.
  */
 function HighlightedCode({ text }) {
   return text
@@ -24,7 +23,7 @@ function HighlightedCode({ text }) {
 }
 
 export default function ProfileWindow({ t, profile, onProfileChange }) {
-  // These are illustrative profile snippets, not executable application code.
+  // These are illustrative profile snippets.
   const code =
     profile === "web"
       ? `// ${t.profileCommentWeb}

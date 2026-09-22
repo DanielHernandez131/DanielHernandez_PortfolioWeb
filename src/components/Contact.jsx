@@ -6,7 +6,7 @@ export default function Contact({ t }) {
 
   function handleSubmit(event) {
     // Native required/email validation runs before submit. Read fields only here
-    // so language changes do not reset the visitor's uncontrolled inputs.
+    // language changes do not reset the visitor's uncontrolled inputs.
     event.preventDefault();
     const data = Object.fromEntries(new FormData(event.currentTarget));
     setPrepared(true);

@@ -1,4 +1,3 @@
-/* Keep the existing browser defaults: import Tailwind without Preflight. */
 @layer theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
