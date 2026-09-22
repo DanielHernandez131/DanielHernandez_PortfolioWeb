@@ -1,12 +1,11 @@
-[README.md](https://github.com/user-attachments/files/32480035/README.md)
 <div align="center">
   <img src="assets/images/cat-eye-logo.png" alt="Daniel Hernández cat-eye logo" width="112" />
 
-  # Daniel Hernández — Developer Portfolio
+# Daniel Hernández — Developer Portfolio
 
-  **A bilingual, interactive portfolio connecting full-stack development, game development and experience design.**
+**A bilingual, interactive portfolio connecting full-stack development, game development and experience design.**
 
-  [LinkedIn](https://www.linkedin.com/in/daniel-hernandez-tamayo/) · [GitHub](https://github.com/DanielHernandez131)
+[LinkedIn](https://www.linkedin.com/in/daniel-hernandez-tamayo/) · [GitHub](https://github.com/DanielHernandez131)
 </div>
 
 ## About the project
@@ -24,20 +23,7 @@ The experience includes selected projects, professional and academic background,
 - Expandable project details with independent controls.
 - Accessible semantic markup and keyboard-friendly interactions.
 - Contact form that prepares a pre-filled email without requiring a backend.
-- Lightweight implementation with no frameworks or runtime dependencies.
-
-## Run locally
-
-No installation or build process is required. Clone the repository and start a local static server:
-
-```bash
-git clone https://github.com/DanielHernandez131/DanielHernandez_PortfolioWeb.git
-cd DanielHernandez_PortfolioWeb
-python3 -m http.server 8000
-```
-
-Then open [http://localhost:8000](http://localhost:8000) in your browser.
-
+- React components, Tailwind CSS utilities and custom CSS, built with Vite. No router, UI kit or translation library.
 
 ## Featured projects
 
@@ -55,42 +41,97 @@ A game concept that explores emotions as gameplay mechanics, inspired by Plutchi
 
 ## Technology overview
 
-| Area | Technologies |
-| --- | --- |
-| Frontend | React, JavaScript, HTML5, CSS3, Bootstrap, Vite |
-| Backend | Python, Flask, SQLAlchemy, SQL, REST APIs, JWT |
-| Game Development | Unity, C#, Java, C++, game design, mechanics design |
+| Area             | Technologies                                              |
+| ---------------- | --------------------------------------------------------- |
+| Frontend         | React, JavaScript, HTML5, CSS3, Bootstrap, Tailwind, Vite |
+| Backend          | Python, Flask, MongoDB, SQL, REST APIs, JWT               |
+| Game Development | Unity, C#, Java, C++, game design, mechanics design       |
 
-This portfolio itself is built with semantic HTML, modular CSS and vanilla JavaScript.
+This portfolio itself uses React 19, Tailwind CSS 4 and Vite 7. The technologies listed in the table describe my professional toolkit, not additional dependencies of this website.
+
+## Run locally
+
+Install Node.js 22.12+ (22.x) or Node.js 24+ and npm. From the repository folder:
+
+```bash
+npm ci
+npm run dev
+```
+
+Open the local URL printed by Vite. No backend or environment variables are required.
+
+```bash
+npm run build    # Generate the static website in dist/
+npm run preview  # Preview the production build locally
+npm test         # Check translations, project data and email encoding
+```
+
+Deploy the contents of `dist/` to a static host. Vite uses relative asset URLs so the build can also be hosted in a repository subdirectory. Opening `index.html` directly or serving the source with Python no longer runs the application; use Vite during development.
 
 ## Project structure
 
 ```text
 .
-├── assets/
-│   └── images/
-│       └── cat-eye-logo.png
-├── css/
-│   ├── base.css
-│   └── components.css
-├── js/
-│   └── app.js
+├── assets/images/cat-eye-logo.png
+├── src/
+│   ├── components/       # Page sections, project cards, profile window and shared UI
+│   ├── data/
+│   │   ├── translations.js  # Spanish and English text
+│   │   ├── projects.js      # Project metadata and translation keys
+│   │   └── contact.js       # Email address and mailto builder
+│   ├── styles/
+│   │   ├── index.css        # Tailwind and CSS layer imports
+│   │   ├── base.css         # Global foundations and theme variables
+│   │   └── components.css   # Bespoke visuals and responsive refinements
+│   ├── App.jsx          # Language/profile state and page composition
+│   └── main.jsx         # React entry point
+├── tests/content.test.js
 ├── index.html
+├── package.json
+├── package-lock.json
+├── vite.config.js
 └── README.md
 ```
 
-- `index.html` contains the semantic structure and portfolio content.
-- `css/base.css` defines the layout, typography and shared visual foundations.
-- `css/components.css` contains component styles, responsive rules and profile themes.
-- `js/app.js` manages translations, profile switching and the contact form.
+## Code review guide
+
+Start with `src/App.jsx` for page composition and shared language/profile state, then follow the section components. `SectionHeading` and the project card keep repeated markup consistent; project content and translations live in `src/data/`.
+
+- **State:** props carry the active dictionary and profile. Only document language and the CSS theme need effects; form fields and project disclosures use native browser state.
+- **Rendering:** rich translations and profile snippets render as React text/elements, without injected HTML.
+- **Styling:** Tailwind owns common layouts; custom CSS covers the portfolio's visual identity. CSS layers let utilities override component styles intentionally.
+- **Dependencies:** React handles the UI; Vite and Tailwind are build tools. Translation, disclosure and email handling use local code and browser APIs.
+- **Validation:** `npm test` checks translation parity, project references and email encoding. `npm run build` validates the production bundle; visual and interaction checks still require a browser.
+
+Edit source files in `src/`. `dist/` is generated by `npm run build`, and `node_modules/` is installed by npm; both are ignored by Git. Comments document intent, constraints and browser behavior rather than restating JSX.
 
 ## Customisation
 
-All translations are stored in the `translations` object in `js/app.js`. Every new translation key should be included in both the `es` and `en` objects.
+### Content and languages
 
-The Full-Stack palette is defined through CSS custom properties in `css/base.css`. The Game Development theme overrides these properties through `body[data-stack="game"]` in `css/components.css`.
+All translated text lives in `src/data/translations.js`. Add each new key to both `es` and `en`. Components receive the active dictionary as `t`; language and profile state live in `App.jsx`. Form input and expanded project details remain in place when switching languages.
 
-The contact form uses a `mailto:` link to prepare an email in the visitor's preferred email application. Receiving and processing submissions directly would require a form service or a backend endpoint.
+`RichText` supports the existing `<strong>` and `<br>` markers as React elements without injecting HTML. The profile code window shares one template per profile and translates its comments and lists.
+
+### Adding a project
+
+1. Add an entry with a unique `id` to `src/data/projects.js`.
+2. Set `name`, the `role` and `summary` translation keys, `tags`, and the `details` array of `{ title, text }` translation keys. Tags use either `{ label: "React" }` or `{ translation: "mechanics" }`.
+3. Add the referenced text in both languages in `translations.js`.
+4. For bespoke artwork, add a variant in `ProjectVisual.jsx` and set the entry's `visual` field. Omit `visual` for a text-only card.
+5. Run `npm test` and `npm run build`, then check both languages on desktop and mobile.
+
+The project grid and card markup are shared; new cards do not require duplicating the section.
+
+### Styling and responsive layout
+
+Tailwind utilities handle common grid and flex layouts directly in JSX. Custom CSS preserves the original typography, project artwork and code window. Tailwind Preflight is intentionally omitted to retain the original browser defaults.
+
+Theme variables live in `src/styles/base.css`. Full-Stack uses lime; `body[data-stack="game"]` overrides them for the violet theme. The original 720px, 900px and 1000px layout thresholds are retained, with additional wrapping for narrow mobile screens. Focus indicators and reduced-motion preferences remain supported.
+
+### Contact
+
+The form prepares a pre-filled email using `mailto:` and the visitor's email application; it does not send or store submissions. Edit the recipient in `src/data/contact.js`. Direct submission would require a form service or backend.
 
 ## Contact
 
