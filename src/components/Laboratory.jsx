@@ -3,7 +3,7 @@ import SectionHeading from "./SectionHeading.jsx";
 import OrbitStudy from "./OrbitStudy.jsx";
 import MemoryGame from "./MemoryGame.jsx";
 
-export default function Laboratory({ t }) {
+export default function Laboratory({ t, active = true }) {
   const [experiment, setExperiment] = useState("orbits");
 
   return (
@@ -17,7 +17,7 @@ export default function Laboratory({ t }) {
       </div>
       <div data-reveal>
         <div id="experiment-orbits" hidden={experiment !== "orbits"}><OrbitStudy t={t} /></div>
-        <div id="experiment-memory" hidden={experiment !== "memory"}><MemoryGame t={t} active={experiment === "memory"} /></div>
+        <div id="experiment-memory" hidden={experiment !== "memory"}><MemoryGame t={t} active={active && experiment === "memory"} /></div>
       </div>
     </section>
   );

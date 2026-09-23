@@ -5,6 +5,7 @@ import Hero from "./components/Hero.jsx";
 import Projects from "./components/Projects.jsx";
 import Experience from "./components/Experience.jsx";
 import Technologies from "./components/Technologies.jsx";
+import CatRace from "./components/CatRace.jsx";
 import Laboratory from "./components/Laboratory.jsx";
 import Social from "./components/Social.jsx";
 import Contact from "./components/Contact.jsx";
@@ -35,6 +36,7 @@ export default function App() {
     <>
       <Header
         t={t}
+        profile={profile}
         language={language}
         onLanguageChange={() => setLanguage(language === "es" ? "en" : "es")}
       />
@@ -43,7 +45,8 @@ export default function App() {
         <Projects t={t} />
         <Experience t={t} />
         <Technologies t={t} />
-        <Laboratory t={t} />
+        <div hidden={profile !== "web"}><Laboratory t={t} active={profile === "web"} /></div>
+        <div hidden={profile !== "game"}><CatRace t={t} active={profile === "game"} /></div>
         <Social t={t} />
         <Contact t={t} />
       </main>

@@ -7,3 +7,4 @@
 
 @import "./refinements.css" layer(components);
 @import "./laboratory.css" layer(components);
+@import "./cat-race.css" layer(components);

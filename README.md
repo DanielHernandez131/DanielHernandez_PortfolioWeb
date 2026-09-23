@@ -160,6 +160,12 @@ Theme variables live in `src/styles/base.css`. Full-Stack uses lime; `body[data-
 
 Experiment / 002 is **Orbital memory**, implemented in `MemoryGame.jsx`: repeat sequences of four numbered nodes with mouse, touch or keys 1–4 while the game has focus. Each completed round adds one step. Playback can be repeated without a response time limit; switching experiments or hiding the browser tab pauses the game. A pure reducer in `src/utils/memoryGame.js` handles game rules, with tests for scoring, mistakes, restarting and pausing. No executable, backend or extra dependency is needed.
 
+Experiment / 003 is **Schrödinger’s cat race**, a Game Development easter egg discovered by scrolling below the toolkit. Full-Stack shows experiments 001 and 002; Game Development shows only 003 and hides the laboratory navigation link. Switching profiles preserves game state and suspends hidden timers.
+
+`CatRace.jsx` supports one human against an automated opponent or two/three local players. Each turn has an advance die followed by an event die. Alive cats treat an advance roll of 1 as 3; dead cats gain 1 from fish; quantum cats ignore radioactive isotope setbacks. Fish/isotope/quiet/shortcut/cheering events otherwise apply −1/−2/0/+1/+2. Both dice resolve before a cat at or beyond space 20 wins; no exact roll is needed. Position never falls below zero. This finish-line convention is stated in the instructions and `FINISH` lives in `src/utils/catRace.js`.
+
+The pure race reducer has tests for all die outcomes, cat abilities, turn order, duplicate input, restart and finishing. Dice results are chosen once per throw; offscreen or hidden-tab pauses preserve a pending result. `RaceDie.jsx` animates preview faces without influencing the outcome and respects reduced-motion preferences. Cat art is inline SVG, and the game requires no executable, backend or additional dependencies.
+
 ### Contact
 
 The form prepares a pre-filled email using `mailto:` and the visitor's email application; it does not send or store submissions. Edit the recipient in `src/data/contact.js`. Direct submission would require a form service or backend.
