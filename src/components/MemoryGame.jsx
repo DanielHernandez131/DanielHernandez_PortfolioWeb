@@ -1,10 +1,16 @@
-import { useEffect, useReducer, useRef } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { initialMemoryGame, memoryGameReducer } from "../utils/memoryGame.js";
 
 const randomNode = () => Math.floor(Math.random() * 4);
 
 export default function MemoryGame({ t, active }) {
   const board = useRef(null);
+  const [feedback, setFeedback] = useState(null);
+  useEffect(() => {
+    if (!feedback) return;
+    const timer = setTimeout(() => setFeedback(null), 180);
+    return () => clearTimeout(timer);
+  }, [feedback]);
   const [game, dispatch] = useReducer(memoryGameReducer, initialMemoryGame);
 
   useEffect(() => {
@@ -35,12 +41,19 @@ export default function MemoryGame({ t, active }) {
   };
   const currentRound = Math.max(1, game.sequence.length);
 
+  function pressNode(node) {
+    if (!active || game.phase !== "input") return;
+    // Shared feedback for shortcuts, touch and native button activation.
+    setFeedback({ node });
+    dispatch({ type: "press", node });
+  }
+
   function handleKey(event) {
     // Shortcuts only belong to this focused game; never intercept the page/forms.
     if (event.repeat || event.altKey || event.ctrlKey || event.metaKey) return;
     if (/^[1-4]$/.test(event.key)) {
       event.preventDefault();
-      dispatch({ type: "press", node: Number(event.key) - 1 });
+      pressNode(Number(event.key) - 1);
     }
   }
 
@@ -56,9 +69,9 @@ export default function MemoryGame({ t, active }) {
           <div className="memory-core" aria-hidden="true"><span>{t.gameRound}</span><strong>{String(currentRound).padStart(2, "0")}</strong></div>
           {[0, 1, 2, 3].map((node) => (
             <button key={node} type="button" className={`memory-node memory-node-${node}`}
-              data-lit={game.lit === node} aria-disabled={game.phase !== "input"}
+              data-lit={game.lit === node || (active && ["input", "success", "over"].includes(game.phase) && feedback?.node === node)} aria-disabled={game.phase !== "input"}
               aria-label={`${t.gameNode} ${node + 1}`}
-              onClick={() => dispatch({ type: "press", node })}>
+              onClick={() => pressNode(node)}>
               <span>{node + 1}</span>
             </button>
           ))}
