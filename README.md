@@ -19,7 +19,8 @@ The experience includes selected projects, professional and academic background,
 - Fully responsive layout for desktop and mobile devices.
 - Spanish and English content without page reloads.
 - Interactive Full-Stack and Game Development profile switcher.
-- Dynamic lime and violet colour themes.
+- Dynamic lime and violet colour themes, with a grid-to-constellation hero transition.
+- Generative SVG laboratory with three presets, live controls and vector export.
 - Staggered hero entrance and scroll reveals with reduced-motion support.
 - Expandable project details with independent controls.
 - Accessible semantic markup and keyboard-friendly interactions.
@@ -150,6 +151,12 @@ Theme variables live in `src/styles/base.css`. Full-Stack uses lime; `body[data-
 ### Animations
 
 `src/styles/motion.css` controls the staggered hero entrance and gentle scroll reveals. Add `data-reveal` to an element to reveal it once when it enters the viewport. `useScrollReveal` uses a single IntersectionObserver, preserves initially visible content and reveals keyboard-focused elements immediately. Animations respect `prefers-reduced-motion`, including changes made during the visit; unsupported browsers keep content visible. Language and profile changes do not restart the entrance.
+
+### Interactive laboratory
+
+`src/components/Laboratory.jsx` contains an orbit composition experiment with Bloom, Spiral and Orbit presets. Native range controls adjust circle count, spread and hue; reset restores the selected preset. The downloadable SVG embeds its own colours and background. The experiment works with keyboard and touch, keeps its state when switching languages or profiles, and does not require a canvas library or animation loop.
+
+`src/styles/refinements.css` adds local font stacks, an italic serif accent in the hero, profile-specific backgrounds, interaction states and the responsive laboratory layout.
 
 ### Contact
 

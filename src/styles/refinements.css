@@ -1,0 +1,144 @@
+/* Local font stacks keep the editorial/technical contrast free of font requests. */
+body { font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif; }
+h1, h2, h3 { text-wrap: balance; }
+h1 { font-weight: 600; }
+.hero h1 em {
+  font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.055em;
+}
+.section-heading h2 { max-width: 650px; }
+.section-heading h2 > span:first-child { color: var(--text); }
+.hero-backdrop { transition: color 700ms ease; }
+.hero-grid { transition: opacity 900ms ease, transform 1200ms ease; }
+.hero-orbit { transition: opacity 900ms ease; }
+.hero-constellation {
+  position: absolute;
+  width: 78%;
+  height: 100%;
+  right: -5%;
+  top: 0;
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 1000ms ease, transform 1400ms ease;
+  overflow: visible;
+}
+.hero-constellation path { stroke: currentColor; stroke-width: 0.8; opacity: 0.38; }
+.hero-constellation circle { fill: currentColor; }
+.hero[data-profile="web"] .hero-orbit { opacity: 0.045; }
+.hero[data-profile="game"] .hero-grid { opacity: 0; transform: scale(1.06); }
+.hero[data-profile="game"] .hero-orbit { opacity: 0.09; }
+.hero[data-profile="game"] .hero-constellation { opacity: 0.48; transform: scale(1); }
+.code-window { transition: background-color 500ms ease, border-color 500ms ease, box-shadow 500ms ease; }
+body[data-stack="game"] .code-window {
+  border-color: #584674;
+  box-shadow: 18px 22px 0 #15111d, 18px 22px 0 1px #352b49;
+}
+.code-tabs button { position: relative; transition: color 200ms ease, background-color 200ms ease; }
+.code-tabs button:hover { color: var(--text); background: #ffffff08; }
+.code-tabs button.selected::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 18px;
+  width: 12px;
+  height: 2px;
+  background: var(--accent);
+}
+nav { gap: clamp(16px, 2.4vw, 32px); }
+nav a, .text-link { position: relative; }
+nav a::after, .text-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms ease;
+}
+nav a:is(:hover, :focus-visible)::after, .text-link:is(:hover, :focus-visible)::after { transform: scaleX(1); }
+.button, .nav-contact {
+  transition: transform 200ms ease, background-color 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.button:active { transform: translateY(1px) scale(0.98); }
+summary > b { transition: transform 200ms ease; }
+summary:hover { color: var(--accent); }
+.project[data-reveal], .tech-grid article[data-reveal] {
+  transition: opacity 650ms ease, translate 650ms cubic-bezier(0.22, 1, 0.36, 1), border-color 250ms ease, box-shadow 250ms ease;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .button:hover { transform: translateY(-3px); box-shadow: 0 8px 24px #0003; }
+  .project:hover, .tech-grid article:hover { border-color: var(--accent); box-shadow: 0 12px 32px #0002; }
+  .nav-contact:hover { border-color: var(--accent); }
+}
+@keyframes constellation-breathe { to { opacity: 0.35; } }
+@media (prefers-reduced-motion: no-preference) {
+  .hero[data-profile="game"] .hero-constellation circle { animation: constellation-breathe 4s ease-in-out infinite alternate; }
+  .hero-constellation circle:nth-child(3n) { animation-delay: -2s !important; }
+}
+
+.laboratory { margin-top: 50px; border-top: 1px solid var(--line); }
+.lab-workspace {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #181c1e;
+}
+.lab-stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
+  min-width: 0;
+  background: #111314;
+  border-right: 1px solid var(--line);
+}
+.lab-stage svg { display: block; width: 100%; max-width: 500px; align-self: center; }
+.lab-stage-label { display: flex; justify-content: space-between; gap: 12px; margin: 0; color: var(--muted); font: 10px monospace; letter-spacing: 1px; }
+.lab-controls { padding: clamp(22px, 3vw, 40px); min-width: 0; }
+.lab-controls h3 { font-size: 30px; line-height: 1.2; letter-spacing: -1px; margin: 16px 0; }
+.lab-controls p { color: var(--muted); font-size: 14px; }
+.lab-presets { display: flex; gap: 6px; flex-wrap: wrap; margin: 24px 0; }
+.lab-presets button {
+  cursor: pointer;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 5px;
+  font: 12px monospace;
+  transition: color 200ms ease, border-color 200ms ease, background-color 200ms ease;
+}
+.lab-presets button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); background: #ffffff05; }
+.lab-presets button:hover { color: var(--text); }
+.lab-slider { margin: 18px 0; }
+.lab-slider label { display: flex; justify-content: space-between; font-size: 13px; }
+.lab-slider output { color: var(--accent); font-family: monospace; font-variant-numeric: tabular-nums; }
+.lab-slider input { width: 100%; margin: 12px 0 0; accent-color: var(--accent); cursor: pointer; min-height: 24px; }
+.lab-slider input:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 3px; }
+.lab-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; margin-top: 24px; }
+.lab-actions .button { font-size: 13px; border: 0; cursor: pointer; }
+.lab-reset { color: var(--muted); background: transparent; border: 0; padding: 10px 0; cursor: pointer; font-size: 12px; }
+.lab-reset:hover { color: var(--text); }
+body[data-stack="game"] .lab-workspace { background: #17121f; }
+@media (max-width: 1000px) {
+  header nav { gap: 16px; font-size: 12px; }
+}
+@media (max-width: 800px) {
+  .lab-workspace { grid-template-columns: 1fr; }
+  .lab-stage { border-right: 0; border-bottom: 1px solid var(--line); }
+  .lab-stage svg { max-width: 380px; }
+}
+@media (max-width: 720px) {
+  .hero-constellation { width: 125%; height: 75%; top: 25%; right: -20%; }
+  body[data-stack="game"] .code-window { box-shadow: 8px 10px 0 #15111d, 8px 10px 0 1px #352b49; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .button:hover, .button:active { transform: none; }
+}

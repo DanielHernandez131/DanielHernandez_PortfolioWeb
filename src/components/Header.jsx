@@ -8,6 +8,7 @@ export default function Header({ t, language, onLanguageChange }) {
         <a href="#proyectos">{t.navProjects}</a>
         <a href="#experiencia">{t.navExperience}</a>
         <a href="#tecnologias">{t.navTech}</a>
+        <a href="#laboratorio">{t.navLab}</a>
       </nav>
       <div className="header-actions">
         <button

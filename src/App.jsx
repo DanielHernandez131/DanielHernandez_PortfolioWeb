@@ -5,6 +5,7 @@ import Hero from "./components/Hero.jsx";
 import Projects from "./components/Projects.jsx";
 import Experience from "./components/Experience.jsx";
 import Technologies from "./components/Technologies.jsx";
+import Laboratory from "./components/Laboratory.jsx";
 import Social from "./components/Social.jsx";
 import Contact from "./components/Contact.jsx";
 import Brand from "./components/Brand.jsx";
@@ -42,6 +43,7 @@ export default function App() {
         <Projects t={t} />
         <Experience t={t} />
         <Technologies t={t} />
+        <Laboratory t={t} />
         <Social t={t} />
         <Contact t={t} />
       </main>
