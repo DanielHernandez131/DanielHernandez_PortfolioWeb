@@ -83,3 +83,31 @@
     animation: orbit-turn 64s linear infinite reverse;
   }
 }
+
+/* Ambient motion is separate from the one-time entrance and profile crossfade. */
+@keyframes hero-grid-travel {
+  to { background-position: 52px 52px; }
+}
+@keyframes constellation-drift {
+  from { translate: -10px 8px; rotate: -2deg; }
+  to { translate: 12px -12px; rotate: 2deg; }
+}
+@keyframes editor-float {
+  from { translate: 0 0; }
+  to { translate: 0 -9px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-grid { animation: hero-grid-travel 14s linear infinite; }
+  .hero-constellation { animation: constellation-drift 10s ease-in-out infinite alternate; }
+  .hero .code-window { animation: editor-float 5s ease-in-out infinite alternate; }
+  .hero .code-window:focus-within { animation-play-state: paused; }
+  .hero-orbit-outer { animation-duration: 28s; }
+  .hero-orbit-inner { animation-duration: 38s; }
+}
+@media (max-width: 720px) {
+  /* Match the moving tile size to avoid a jump when the loop restarts. */
+  .hero-grid { background-size: 52px 52px; }
+}
+@media print {
+  .hero .code-window { animation: none; }
+}

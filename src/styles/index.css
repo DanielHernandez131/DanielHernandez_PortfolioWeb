@@ -6,3 +6,4 @@
 @import "./motion.css" layer(components);
 
 @import "./refinements.css" layer(components);
+@import "./laboratory.css" layer(components);
