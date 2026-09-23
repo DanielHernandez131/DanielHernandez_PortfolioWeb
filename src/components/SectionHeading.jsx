@@ -3,7 +3,7 @@ import RichText from "./RichText.jsx";
 /** Shared heading for sections with an eyebrow, title and supporting copy. */
 export default function SectionHeading({ eyebrow, title, lead }) {
   return (
-    <div className="section-heading">
+    <div data-reveal className="section-heading">
       <div>
         <div className="eyebrow">{eyebrow}</div>
         <h2>

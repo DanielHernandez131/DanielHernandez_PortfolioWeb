@@ -10,6 +10,7 @@ export default function Social({ t }) {
       />
       <div className="online-grid grid grid-cols-1 gap-5 min-[721px]:grid-cols-2">
         <a
+          data-reveal
           href="https://www.linkedin.com/in/daniel-hernandez-tamayo/"
           target="_blank"
           rel="noopener noreferrer"
@@ -22,6 +23,7 @@ export default function Social({ t }) {
           <b>↗</b>
         </a>
         <a
+          data-reveal
           href="https://github.com/DanielHernandez131"
           target="_blank"
           rel="noopener noreferrer"

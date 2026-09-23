@@ -7,7 +7,7 @@ export default function Hero({ t, profile, onProfileChange }) {
       className="hero wrap grid grid-cols-1 gap-3 min-[721px]:grid-cols-[1.15fr_1fr] min-[721px]:gap-[25px] min-[1001px]:gap-[55px]"
       id="inicio"
     >
-      <div>
+      <div className="hero-copy">
         <div className="eyebrow">
           <span className="small-line"></span>
           <span>{t.heroEyebrow}</span>

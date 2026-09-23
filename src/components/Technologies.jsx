@@ -9,7 +9,7 @@ export default function Technologies({ t }) {
         lead={t.techLead}
       />
       <div className="tech-grid grid grid-cols-1 gap-5 min-[721px]:grid-cols-3">
-        <article>
+        <article data-reveal>
           <span className="tech-icon">&lt;/&gt;</span>
           <h3>Frontend</h3>
           <p>{t.frontendText}</p>
@@ -23,7 +23,7 @@ export default function Technologies({ t }) {
             <span>Vite</span>
           </div>
         </article>
-        <article>
+        <article data-reveal>
           <span className="tech-icon">{"{ }"}</span>
           <h3>Backend</h3>
           <p>{t.backendText}</p>
@@ -36,7 +36,7 @@ export default function Technologies({ t }) {
             <span>JWT</span>
           </div>
         </article>
-        <article>
+        <article data-reveal>
           <span className="tech-icon">⌘</span>
           <h3>Game Development</h3>
           <p>{t.gameDevText}</p>

@@ -20,6 +20,7 @@ The experience includes selected projects, professional and academic background,
 - Spanish and English content without page reloads.
 - Interactive Full-Stack and Game Development profile switcher.
 - Dynamic lime and violet colour themes.
+- Staggered hero entrance and scroll reveals with reduced-motion support.
 - Expandable project details with independent controls.
 - Accessible semantic markup and keyboard-friendly interactions.
 - Contact form that prepares a pre-filled email without requiring a backend.
@@ -94,10 +95,12 @@ Once the workflow exists on `main`, **Actions → Deploy portfolio to GitHub Pag
 │   │   ├── translations.js  # Spanish and English text
 │   │   ├── projects.js      # Project metadata and translation keys
 │   │   └── contact.js       # Email address and mailto builder
+│   ├── hooks/           # Scroll reveal observer and motion preference handling
 │   ├── styles/
 │   │   ├── index.css        # Tailwind and CSS layer imports
 │   │   ├── base.css         # Global foundations and theme variables
-│   │   └── components.css   # Bespoke visuals and responsive refinements
+│   │   ├── components.css   # Bespoke visuals and responsive refinements
+│   │   └── motion.css       # Hero entrance and scroll reveal animations
 │   ├── App.jsx          # Language/profile state and page composition
 │   └── main.jsx         # React entry point
 ├── tests/content.test.js
@@ -112,7 +115,7 @@ Once the workflow exists on `main`, **Actions → Deploy portfolio to GitHub Pag
 
 Start with `src/App.jsx` for page composition and shared language/profile state, then follow the section components. `SectionHeading` and the project card keep repeated markup consistent; project content and translations live in `src/data/`.
 
-- **State:** props carry the active dictionary and profile. Only document language and the CSS theme need effects; form fields and project disclosures use native browser state.
+- **State:** props carry the active dictionary and profile. Effects synchronise document language, the CSS theme and the scroll reveal observer; form fields and project disclosures use native browser state.
 - **Rendering:** rich translations and profile snippets render as React text/elements, without injected HTML.
 - **Styling:** Tailwind owns common layouts; custom CSS covers the portfolio's visual identity. CSS layers let utilities override component styles intentionally.
 - **Dependencies:** React handles the UI; Vite and Tailwind are build tools. Translation, disclosure and email handling use local code and browser APIs.
@@ -143,6 +146,10 @@ The project grid and card markup are shared; new cards do not require duplicatin
 Tailwind utilities handle common grid and flex layouts directly in JSX. Custom CSS preserves the original typography, project artwork and code window. Tailwind Preflight is intentionally omitted to retain the original browser defaults.
 
 Theme variables live in `src/styles/base.css`. Full-Stack uses lime; `body[data-stack="game"]` overrides them for the violet theme. The original 720px, 900px and 1000px layout thresholds are retained, with additional wrapping for narrow mobile screens. Focus indicators and reduced-motion preferences remain supported.
+
+### Animations
+
+`src/styles/motion.css` controls the staggered hero entrance and gentle scroll reveals. Add `data-reveal` to an element to reveal it once when it enters the viewport. `useScrollReveal` uses a single IntersectionObserver, preserves initially visible content and reveals keyboard-focused elements immediately. Animations respect `prefers-reduced-motion`, including changes made during the visit; unsupported browsers keep content visible. Language and profile changes do not restart the entrance.
 
 ### Contact
 
