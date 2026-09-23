@@ -4,7 +4,7 @@ import SectionHeading from "./SectionHeading.jsx";
 
 function ProjectCard({ project, t }) {
   return (
-    <article className="project min-w-0">
+    <article data-reveal className="project min-w-0">
       <ProjectVisual variant={project.visual} t={t} />
       <div className="project-info">
         <div className="project-title">

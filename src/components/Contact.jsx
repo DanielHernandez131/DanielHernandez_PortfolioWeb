@@ -16,9 +16,9 @@ export default function Contact({ t }) {
 
   return (
     <section className="wrap contact section" id="contacto">
-      <div className="eyebrow">{t.contactEyebrow}</div>
+      <div data-reveal className="eyebrow">{t.contactEyebrow}</div>
       <div className="mt-[25px] grid grid-cols-1 items-start gap-[30px] min-[901px]:grid-cols-[0.85fr_1.15fr] min-[901px]:gap-[75px]">
-        <div className="contact-copy min-w-0">
+        <div data-reveal className="contact-copy min-w-0">
           <h2>
             <span>{t.contactTitle}</span>
             <span>.</span>
@@ -29,6 +29,7 @@ export default function Contact({ t }) {
           </a>
         </div>
         <form
+          data-reveal
           className="contact-form min-w-0"
           onSubmit={handleSubmit}
           onInput={() => setPrepared(false)}

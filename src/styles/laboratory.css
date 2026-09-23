@@ -1,0 +1,83 @@
+/* Experiments share a stage while keeping their own state and controls. */
+.experiment-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 0 24px;
+}
+.experiment-picker button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+}
+.experiment-picker button span { font: 11px monospace; color: var(--accent); }
+.experiment-picker button[aria-pressed="true"] {
+  background: #ffffff06;
+  border-color: var(--accent);
+  color: var(--text);
+}
+.experiment-picker button:hover { color: var(--text); }
+@media (max-width: 420px) {
+  .experiment-picker { display: grid; }
+}
+
+.memory-stage { min-height: 520px; }
+.memory-board { position: relative; width: 100%; max-width: 440px; aspect-ratio: 1; margin: 24px auto; }
+.memory-board .memory-connections { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; fill: none; stroke: var(--accent); stroke-width: 1; opacity: 0.2; }
+.memory-connections circle { stroke-dasharray: 3 9; }
+.memory-core { position: absolute; inset: 35%; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid var(--line); border-radius: 50%; background: var(--bg); }
+.memory-core span { font: 10px monospace; color: var(--muted); text-transform: uppercase; }
+.memory-core strong { font: 38px monospace; color: var(--text); }
+.memory-node {
+  position: absolute;
+  width: 18%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--node-color);
+  color: var(--node-color);
+  background: #1c2022;
+  border-radius: 22%;
+  font: 24px monospace;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.memory-node-0 { --node-color: #c2f970; left: 41%; top: 7.75%; }
+.memory-node-1 { --node-color: #b6a0ff; left: 74.25%; top: 41%; }
+.memory-node-2 { --node-color: #82d7ed; left: 41%; top: 74.25%; }
+.memory-node-3 { --node-color: #ffbe83; left: 7.75%; top: 41%; }
+.memory-node[data-lit="true"], .memory-node[aria-disabled="false"]:active {
+  background: var(--node-color);
+  color: #111314;
+  box-shadow: 0 0 32px color-mix(in srgb, var(--node-color) 35%, transparent);
+  border-width: 3px;
+}
+.memory-node[aria-disabled="true"] { cursor: default; }
+.memory-node[aria-disabled="false"]:hover { border-width: 3px; }
+.memory-status { display: flex; justify-content: space-between; align-items: center; min-height: 48px; gap: 16px; color: var(--accent); font: 13px monospace; }
+.memory-status strong { font-size: 24px; }
+.memory-score { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 0; margin: 20px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.memory-score span { font-size: 13px; color: var(--muted); }
+.memory-score strong { font: 36px monospace; color: var(--accent); }
+.memory-instructions { padding-left: 20px; color: var(--text); font-size: 14px; }
+.memory-instructions li { padding: 0 0 12px 6px; }
+.memory-instructions li::marker { color: var(--accent); font-family: monospace; }
+.memory-game .memory-key-hint { font-size: 12px; }
+@media (max-width: 800px) {
+  .memory-stage { min-height: 0; }
+  .memory-board { max-width: 350px; }
+}
+@media (max-width: 380px) {
+  .memory-core strong { font-size: 28px; }
+  .memory-core span { font-size: 8px; }
+  .memory-node { font-size: 20px; }
+}
+
+.memory-board:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: 16px; }

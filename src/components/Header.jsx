@@ -1,6 +1,6 @@
 import Brand from "./Brand.jsx";
 
-export default function Header({ t, language, onLanguageChange }) {
+export default function Header({ t, profile, language, onLanguageChange }) {
   return (
     <header>
       <Brand t={t} />
@@ -8,6 +8,7 @@ export default function Header({ t, language, onLanguageChange }) {
         <a href="#proyectos">{t.navProjects}</a>
         <a href="#experiencia">{t.navExperience}</a>
         <a href="#tecnologias">{t.navTech}</a>
+        {profile === "web" && <a href="#laboratorio">{t.navLab}</a>}
       </nav>
       <div className="header-actions">
         <button

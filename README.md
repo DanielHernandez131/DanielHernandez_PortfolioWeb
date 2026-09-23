@@ -19,7 +19,9 @@ The experience includes selected projects, professional and academic background,
 - Fully responsive layout for desktop and mobile devices.
 - Spanish and English content without page reloads.
 - Interactive Full-Stack and Game Development profile switcher.
-- Dynamic lime and violet colour themes.
+- Dynamic lime and violet colour themes, with a grid-to-constellation hero transition.
+- Generative SVG laboratory with three presets, live controls and vector export.
+- Staggered hero entrance and scroll reveals with reduced-motion support.
 - Expandable project details with independent controls.
 - Accessible semantic markup and keyboard-friendly interactions.
 - Contact form that prepares a pre-filled email without requiring a backend.
@@ -94,10 +96,12 @@ Once the workflow exists on `main`, **Actions → Deploy portfolio to GitHub Pag
 │   │   ├── translations.js  # Spanish and English text
 │   │   ├── projects.js      # Project metadata and translation keys
 │   │   └── contact.js       # Email address and mailto builder
+│   ├── hooks/           # Scroll reveal observer and motion preference handling
 │   ├── styles/
 │   │   ├── index.css        # Tailwind and CSS layer imports
 │   │   ├── base.css         # Global foundations and theme variables
-│   │   └── components.css   # Bespoke visuals and responsive refinements
+│   │   ├── components.css   # Bespoke visuals and responsive refinements
+│   │   └── motion.css       # Hero entrance and scroll reveal animations
 │   ├── App.jsx          # Language/profile state and page composition
 │   └── main.jsx         # React entry point
 ├── tests/content.test.js
@@ -112,7 +116,7 @@ Once the workflow exists on `main`, **Actions → Deploy portfolio to GitHub Pag
 
 Start with `src/App.jsx` for page composition and shared language/profile state, then follow the section components. `SectionHeading` and the project card keep repeated markup consistent; project content and translations live in `src/data/`.
 
-- **State:** props carry the active dictionary and profile. Only document language and the CSS theme need effects; form fields and project disclosures use native browser state.
+- **State:** props carry the active dictionary and profile. Effects synchronise document language, the CSS theme and the scroll reveal observer; form fields and project disclosures use native browser state.
 - **Rendering:** rich translations and profile snippets render as React text/elements, without injected HTML.
 - **Styling:** Tailwind owns common layouts; custom CSS covers the portfolio's visual identity. CSS layers let utilities override component styles intentionally.
 - **Dependencies:** React handles the UI; Vite and Tailwind are build tools. Translation, disclosure and email handling use local code and browser APIs.
@@ -143,6 +147,24 @@ The project grid and card markup are shared; new cards do not require duplicatin
 Tailwind utilities handle common grid and flex layouts directly in JSX. Custom CSS preserves the original typography, project artwork and code window. Tailwind Preflight is intentionally omitted to retain the original browser defaults.
 
 Theme variables live in `src/styles/base.css`. Full-Stack uses lime; `body[data-stack="game"]` overrides them for the violet theme. The original 720px, 900px and 1000px layout thresholds are retained, with additional wrapping for narrow mobile screens. Focus indicators and reduced-motion preferences remain supported.
+
+### Animations
+
+`src/styles/motion.css` controls the staggered hero entrance and gentle scroll reveals. Add `data-reveal` to an element to reveal it once when it enters the viewport. `useScrollReveal` uses a single IntersectionObserver, preserves initially visible content and reveals keyboard-focused elements immediately. Animations respect `prefers-reduced-motion`, including changes made during the visit; unsupported browsers keep content visible. Language and profile changes do not restart the entrance. The hero also has continuous grid drift, orbit rotation, constellation drift and gentle editor flotation, all disabled by reduced-motion preferences. Editor flotation pauses while its controls have focus.
+
+### Interactive laboratory
+
+`src/components/Laboratory.jsx` selects between two experiments while preserving their state. `OrbitStudy.jsx` contains an orbit composition experiment with Bloom, Spiral and Orbit presets. Native range controls adjust circle count, spread and hue; reset restores the selected preset. The downloadable SVG embeds its own colours and background. The experiment works with keyboard and touch, keeps its state when switching languages or profiles, and does not require a canvas library. An optional cursor switch enables local particle repulsion, with direct SVG updates limited to one per animation frame. Base geometry is cached per composition; pointer movement does not rerender React, and only changed transforms are written. Leaving the artwork or disabling the switch restores the composition; touch scrolling is preserved. A separate animation switch adds gentle orbital motion and breathing, combinable with cursor repulsion through one frame loop. Both switches default to off, so motion is explicitly requested. Animation pauses offscreen and in hidden tabs. SVG exports omit temporary animation and cursor displacement.
+
+`src/styles/refinements.css` adds local font stacks, an italic serif accent in the hero, profile-specific backgrounds, interaction states and the responsive laboratory layout.
+
+Experiment / 002 is **Orbital memory**, implemented in `MemoryGame.jsx`: repeat sequences of four numbered nodes with mouse, touch or keys 1–4 while the game has focus. Each completed round adds one step. Playback can be repeated without a response time limit; switching experiments or hiding the browser tab pauses the game. A pure reducer in `src/utils/memoryGame.js` handles game rules, with tests for scoring, mistakes, restarting and pausing. No executable, backend or extra dependency is needed.
+
+Experiment / 003 is **Schrödinger’s cat race**, a Game Development easter egg discovered by scrolling below the toolkit. Full-Stack shows experiments 001 and 002; Game Development shows only 003 and hides the laboratory navigation link. Switching profiles preserves game state and suspends hidden timers.
+
+`CatRace.jsx` supports one human against an automated opponent or two/three local players. Each turn has an advance die followed by an event die. Alive cats treat an advance roll of 1 as 3; dead cats gain 1 from fish; quantum cats ignore radioactive isotope setbacks. Fish/isotope/quiet/shortcut/cheering events otherwise apply −1/−2/0/+1/+2. Both dice resolve before a cat at or beyond space 20 wins; no exact roll is needed. Position never falls below zero. This finish-line convention is stated in the instructions and `FINISH` lives in `src/utils/catRace.js`.
+
+The pure race reducer has tests for all die outcomes, cat abilities, turn order, duplicate input, restart and finishing. Dice results are chosen once per throw; offscreen or hidden-tab pauses preserve a pending result. `RaceDie.jsx` animates preview faces without influencing the outcome and respects reduced-motion preferences. Cat art is inline SVG, and the game requires no executable, backend or additional dependencies.
 
 ### Contact
 
