@@ -64,3 +64,22 @@
     animation: none;
   }
 }
+
+@keyframes orbit-turn {
+  to { rotate: 360deg; }
+}
+@keyframes ambient-drift {
+  from { transform: translate(-16px, 12px) scale(0.96); }
+  to { transform: translate(20px, -16px) scale(1.04); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-glow {
+    animation: ambient-drift 12s ease-in-out infinite alternate;
+  }
+  .hero-orbit-outer {
+    animation: orbit-turn 48s linear infinite;
+  }
+  .hero-orbit-inner {
+    animation: orbit-turn 64s linear infinite reverse;
+  }
+}

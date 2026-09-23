@@ -16,11 +16,14 @@ export default function Technologies({ t }) {
           <div className="tech-list flex flex-wrap gap-2">
             <span>React</span>
             <span>JavaScript</span>
+            <span>TypeScript</span>
             <span>HTML5</span>
             <span>CSS3</span>
             <span>Bootstrap</span>
             <span>Tailwind</span>
             <span>Vite</span>
+            <span>Webpack</span>
+            <span>Angular</span>
           </div>
         </article>
         <article data-reveal>
@@ -47,6 +50,19 @@ export default function Technologies({ t }) {
             <span>C++</span>
             <span>Game Design</span>
             <span>{t.mechanicsDesign}</span>
+          </div>
+        </article>
+        <article data-reveal className="workflow-card min-[721px]:col-span-3">
+          <div>
+            <span className="tech-icon" aria-hidden="true">↳</span>
+            <h3>{t.workflowTitle}</h3>
+            <p>{t.workflowText}</p>
+          </div>
+          <div className="tech-list flex flex-wrap gap-2">
+            <span>Git</span>
+            <span>GitHub</span>
+            <span>Azure DevOps</span>
+            <span>{t.metodology}</span>
           </div>
         </article>
       </div>

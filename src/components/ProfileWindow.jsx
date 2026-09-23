@@ -31,8 +31,12 @@ const developer = {
   name: "Daniel Hernández",
   role: "Full-Stack Developer",
   stack: [
-    "JavaScript", "HTML", "CSS",
-    "Python", "Flask", "SQL"
+    "React", "TypeScript", "JavaScript", "HTML", 
+    "CSS", "Python", "Flask", "SQL"
+  ],
+  technologies: [
+    "Git", "GitHub", "MongoDB", "Webpack",
+    "Bootstrap", "Tailwind", "Angular"
   ],
   approach: [${t.profileApproach.map((word) => `"${word}"`).join(", ")}]
 };`
